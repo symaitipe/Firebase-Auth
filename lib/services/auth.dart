@@ -34,4 +34,15 @@ class AuthServices {
     }
   }
 
+
+  // Feat 2: Logout
+  Future logOut() async {
+    try{
+      return await _auth.signOut();
+    }catch(e){
+      e.toString();
+      return null;
+    }
+  }
+
 }

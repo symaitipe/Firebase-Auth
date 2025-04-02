@@ -15,21 +15,81 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Sign In'),
-      ),
+      backgroundColor: Colors.blueGrey[900],
       body: Center(
-        child: ElevatedButton(
-          style: ButtonStyle(
-            minimumSize: WidgetStateProperty.all(const Size(200, 50)),
-            backgroundColor: WidgetStateProperty.all(Colors.blue),
-            foregroundColor: WidgetStateProperty.all(Colors.white),
-          ),
-          onPressed: () async {
-             dynamic result = await _authServices.signInAnonymously();
-             result == null ?print("Anonymous Login Failed") : print("Login success ${result.uid}");
-          },
-          child: const Text("Login"),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Title Section
+            Text(
+              'Welcome Back!',
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(height: 8),
+            Text(
+              'Sign in to continue',
+              style: TextStyle(fontSize: 16, color: Colors.grey[400]),
+            ),
+
+            SizedBox(height: 40),
+
+            // Button Section
+            Container(
+              width: 200,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 10,
+                    offset: Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: ElevatedButton(
+                onPressed: () async {
+                  dynamic result = await _authServices.signInAnonymously();
+                  result == null ?print("Anonymous Login Failed") : print("Login success ${result.uid}");
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+                  backgroundColor: Colors.blueAccent, // Button color
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+                child: Text(
+                  'Sign In',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+
+            SizedBox(height: 20),
+
+            // Secondary Button
+            TextButton(
+              onPressed: ()  {
+                print("Create an account");
+              },
+              child: Text(
+                'Create an Account',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.blueAccent,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
